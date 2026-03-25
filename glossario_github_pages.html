@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Glossário — IA Generativa na Área Médica</title>
+  <meta name="description" content="Glossário de siglas e termos técnicos sobre IA generativa na área médica." />
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#121933;
+      --panel-2:#182243;
+      --text:#e8ecf8;
+      --muted:#b6c0df;
+      --line:#2a3768;
+      --accent:#79a8ff;
+      --accent-2:#9dd7ff;
+      --chip:#22315f;
+      --shadow:0 12px 36px rgba(0,0,0,.28);
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(121,168,255,.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(157,215,255,.12), transparent 24%),
+        linear-gradient(180deg, #0a0f1e 0%, #0b1020 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:var(--accent-2); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .hero{
+      padding:48px 24px 28px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      position:sticky; top:0;
+      backdrop-filter: blur(12px);
+      background:rgba(11,16,32,.82);
+      z-index:50;
+    }
+    .hero-inner{max-width:var(--max); margin:0 auto;}
+    .eyebrow{
+      display:inline-block;
+      background:rgba(121,168,255,.14);
+      color:#d7e6ff;
+      border:1px solid rgba(121,168,255,.28);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:.84rem;
+      letter-spacing:.02em;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem, 4vw, 3.25rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+    .subtitle{
+      max-width:850px;
+      color:var(--muted);
+      margin:0 0 18px;
+      font-size:1.05rem;
+    }
+    .top-actions{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(255,255,255,.12);
+      background:var(--panel);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      font-weight:600;
+    }
+    .btn:hover{background:var(--panel-2); text-decoration:none}
+    .layout{
+      display:grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap:24px;
+      padding-top:28px;
+    }
+    .sidebar{
+      position:sticky; top:170px; align-self:start;
+      background:rgba(18,25,51,.72);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .sidebar h2{
+      font-size:1rem; margin:0 0 10px;
+    }
+    .sidebar ul{
+      list-style:none; padding:0; margin:0;
+    }
+    .sidebar li{margin:6px 0}
+    .sidebar a{
+      display:block; padding:8px 10px; border-radius:10px; color:var(--muted);
+    }
+    .sidebar a:hover{background:rgba(255,255,255,.05); color:var(--text); text-decoration:none}
+    .content{
+      min-width:0;
+    }
+    .panel{
+      background:rgba(18,25,51,.72);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:26px;
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
+    .panel h2{
+      margin:0 0 10px;
+      font-size:1.7rem;
+      letter-spacing:-.02em;
+    }
+    .panel > p.lead{
+      color:var(--muted);
+      margin-top:0;
+      margin-bottom:20px;
+    }
+    .search{
+      width:100%;
+      border:1px solid var(--line);
+      background:#0f1730;
+      color:var(--text);
+      padding:14px 16px;
+      border-radius:14px;
+      outline:none;
+      font-size:1rem;
+      margin-bottom:18px;
+    }
+    .search::placeholder{color:#8fa1d8}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:14px;
+    }
+    details.card{
+      background:linear-gradient(180deg, rgba(24,34,67,.95), rgba(17,24,48,.95));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:0;
+      overflow:hidden;
+    }
+    details.card[open]{border-color:rgba(121,168,255,.35)}
+    summary{
+      list-style:none;
+      cursor:pointer;
+      padding:16px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    summary::-webkit-details-marker{display:none}
+    .term{
+      display:flex; flex-direction:column; gap:4px;
+      min-width:0;
+    }
+    .term strong{
+      font-size:1.02rem;
+      letter-spacing:-.01em;
+    }
+    .tag{
+      display:inline-block;
+      font-size:.76rem;
+      padding:4px 8px;
+      border-radius:999px;
+      background:var(--chip);
+      color:#d4ddfb;
+      border:1px solid rgba(255,255,255,.08);
+      white-space:nowrap;
+    }
+    .card-body{
+      padding:0 18px 18px;
+      color:var(--muted);
+    }
+    .kicker{
+      color:#d8e3ff;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+    .note{
+      background:rgba(121,168,255,.08);
+      border:1px solid rgba(121,168,255,.18);
+      padding:16px 18px;
+      border-radius:16px;
+      color:#dbe6ff;
+    }
+    footer{
+      color:var(--muted);
+      padding:24px 0 50px;
+      text-align:center;
+    }
+    .small{font-size:.95rem}
+    code{
+      background:#0f1730;
+      border:1px solid rgba(255,255,255,.08);
+      padding:2px 8px;
+      border-radius:8px;
+      color:#dce7ff;
+    }
+    .hidden{display:none !important}
+    @media (max-width: 940px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{position:relative; top:auto}
+      .hero{position:relative}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Material complementar da palestra</div>
+      <h1>Glossário — IA Generativa na Área Médica</h1>
+      <p class="subtitle">
+        Página de apoio com <strong>siglas</strong> e <strong>termos técnicos</strong> usados na apresentação.
+        Ideal para link no slide final via URL e QR code.
+      </p>
+      <div class="top-actions">
+        <a class="btn" href="#siglas">Ir para siglas</a>
+        <a class="btn" href="#termos">Ir para termos técnicos</a>
+        <a class="btn" href="#uso-no-slide">Texto para o slide final</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>Navegação</h2>
+        <ul>
+          <li><a href="#siglas">Siglas</a></li>
+          <li><a href="#termos">Termos técnicos</a></li>
+          <li><a href="#uso-no-slide">Texto para o slide final</a></li>
+        </ul>
+      </aside>
+
+      <section class="content">
+        <section class="panel" id="siglas">
+          <h2>Siglas</h2>
+          <p class="lead">Clique em cada item para expandir a definição.</p>
+          <input id="searchSiglas" class="search" type="text" placeholder="Buscar sigla ou definição..." />
+          <div class="grid" id="siglasGrid">
+            <details class="card"><summary><div class="term"><strong>IA</strong><span class="small">Inteligência Artificial</span></div><span class="tag">sigla</span></summary><div class="card-body">Conjunto de técnicas computacionais capazes de executar tarefas associadas a raciocínio, previsão, classificação, geração de conteúdo ou apoio à decisão.</div></details>
+            <details class="card"><summary><div class="term"><strong>LLM</strong><span class="small">Large Language Model</span></div><span class="tag">sigla</span></summary><div class="card-body">Modelo de linguagem treinado em grande volume de texto para prever a continuação mais provável de uma sequência de tokens.</div></details>
+            <details class="card"><summary><div class="term"><strong>RLHF</strong><span class="small">Reinforcement Learning from Human Feedback</span></div><span class="tag">sigla</span></summary><div class="card-body">Método de ajuste em que o modelo aprende a responder de forma mais útil, segura ou obediente com base em avaliações humanas.</div></details>
+            <details class="card"><summary><div class="term"><strong>RAG</strong><span class="small">Retrieval-Augmented Generation</span></div><span class="tag">sigla</span></summary><div class="card-body">Abordagem que combina geração por modelo com recuperação de conteúdo em fontes externas, como protocolos, documentos ou bases institucionais.</div></details>
+            <details class="card"><summary><div class="term"><strong>OOD</strong><span class="small">Out-of-Distribution</span></div><span class="tag">sigla</span></summary><div class="card-body">Situação em que a entrada recebida está fora do tipo de dado, padrão ou contexto para o qual o sistema foi adequadamente treinado ou validado.</div></details>
+            <details class="card"><summary><div class="term"><strong>ECE</strong><span class="small">Expected Calibration Error</span></div><span class="tag">sigla</span></summary><div class="card-body">Métrica que mede o quanto a confiança declarada por um modelo se aproxima da taxa real de acerto.</div></details>
+            <details class="card"><summary><div class="term"><strong>AUROC</strong><span class="small">Area Under the ROC Curve</span></div><span class="tag">sigla</span></summary><div class="card-body">Métrica usada para avaliar a capacidade de separar exemplos positivos e negativos em diferentes limiares.</div></details>
+            <details class="card"><summary><div class="term"><strong>AUPR</strong><span class="small">Area Under the Precision-Recall Curve</span></div><span class="tag">sigla</span></summary><div class="card-body">Métrica útil especialmente quando há desbalanceamento entre classes, avaliando precisão e revocação.</div></details>
+            <details class="card"><summary><div class="term"><strong>CDSS</strong><span class="small">Clinical Decision Support Systems</span></div><span class="tag">sigla</span></summary><div class="card-body">Sistemas de suporte à decisão clínica que auxiliam profissionais com alertas, sugestões, organização de informação ou apoio diagnóstico.</div></details>
+            <details class="card"><summary><div class="term"><strong>BI-RADS</strong><span class="small">Breast Imaging Reporting and Data System</span></div><span class="tag">sigla</span></summary><div class="card-body">Sistema padronizado para classificação de achados em exames de imagem mamária.</div></details>
+            <details class="card"><summary><div class="term"><strong>PHI</strong><span class="small">Protected Health Information</span></div><span class="tag">sigla</span></summary><div class="card-body">Informação de saúde identificável e protegida, conceito comum em marcos de privacidade e segurança de dados.</div></details>
+            <details class="card"><summary><div class="term"><strong>LGPD</strong><span class="small">Lei Geral de Proteção de Dados</span></div><span class="tag">sigla</span></summary><div class="card-body">Lei brasileira que regula o tratamento de dados pessoais, incluindo dados sensíveis de saúde.</div></details>
+            <details class="card"><summary><div class="term"><strong>SaMD</strong><span class="small">Software as a Medical Device</span></div><span class="tag">sigla</span></summary><div class="card-body">Software classificado como dispositivo médico quando exerce função médica relevante, como triagem, diagnóstico ou recomendação terapêutica automatizada.</div></details>
+            <details class="card"><summary><div class="term"><strong>Q&amp;A</strong><span class="small">Questions and Answers</span></div><span class="tag">sigla</span></summary><div class="card-body">Documento de perguntas e respostas usado para esclarecimento regulatório ou operacional.</div></details>
+            <details class="card"><summary><div class="term"><strong>CFM</strong><span class="small">Conselho Federal de Medicina</span></div><span class="tag">sigla</span></summary><div class="card-body">Órgão que normatiza e orienta o exercício profissional médico no Brasil.</div></details>
+            <details class="card"><summary><div class="term"><strong>OMS</strong><span class="small">Organização Mundial da Saúde</span></div><span class="tag">sigla</span></summary><div class="card-body">Agência internacional que publica orientações e guias sobre saúde pública, ética e governança em IA.</div></details>
+            <details class="card"><summary><div class="term"><strong>NIST</strong><span class="small">National Institute of Standards and Technology</span></div><span class="tag">sigla</span></summary><div class="card-body">Instituto norte-americano que publica frameworks e perfis de risco para IA e IA generativa.</div></details>
+            <details class="card"><summary><div class="term"><strong>OWASP</strong><span class="small">Open Worldwide Application Security Project</span></div><span class="tag">sigla</span></summary><div class="card-body">Comunidade e referência técnica em segurança de aplicações, incluindo riscos específicos em sistemas com LLM.</div></details>
+            <details class="card"><summary><div class="term"><strong>FDA</strong><span class="small">Food and Drug Administration</span></div><span class="tag">sigla</span></summary><div class="card-body">Agência reguladora dos Estados Unidos, com orientações sobre software clínico e suporte à decisão.</div></details>
+          </div>
+        </section>
+
+        <section class="panel" id="termos">
+          <h2>Termos técnicos</h2>
+          <p class="lead">Conceitos centrais para entender funcionamento, limitações e uso seguro da IA generativa em saúde.</p>
+          <input id="searchTermos" class="search" type="text" placeholder="Buscar termo ou definição..." />
+          <div class="grid" id="termosGrid">
+            <details class="card"><summary><div class="term"><strong>Transformer</strong><span class="small">Arquitetura-base dos LLMs modernos</span></div><span class="tag">termo</span></summary><div class="card-body">Arquitetura de rede neural baseada em mecanismos de atenção. É a base da maioria dos modelos modernos de linguagem.</div></details>
+            <details class="card"><summary><div class="term"><strong>Token</strong><span class="small">Unidade básica de processamento</span></div><span class="tag">termo</span></summary><div class="card-body">Unidade básica processada pelo modelo. Um token não corresponde necessariamente a uma palavra inteira.</div></details>
+            <details class="card"><summary><div class="term"><strong>Tokenização</strong><span class="small">Segmentação do texto</span></div><span class="tag">termo</span></summary><div class="card-body">Processo de dividir o texto em tokens. Afeta custo, limite de contexto e comportamento do modelo.</div></details>
+            <details class="card"><summary><div class="term"><strong>Janela de contexto</strong><span class="small">Limite de texto considerado</span></div><span class="tag">termo</span></summary><div class="card-body">Quantidade máxima de texto que o modelo consegue considerar em uma única interação.</div></details>
+            <details class="card"><summary><div class="term"><strong>Truncamento</strong><span class="small">Corte de conteúdo por limite</span></div><span class="tag">termo</span></summary><div class="card-body">Corte de parte do conteúdo quando o limite de contexto é excedido.</div></details>
+            <details class="card"><summary><div class="term"><strong>Modelo paramétrico</strong><span class="small">Baseado nos pesos do modelo</span></div><span class="tag">termo</span></summary><div class="card-body">Modelo que responde com base no que foi aprendido e comprimido em seus parâmetros, isto é, em seus pesos internos.</div></details>
+            <details class="card"><summary><div class="term"><strong>Memória paramétrica</strong><span class="small">Conhecimento nos pesos</span></div><span class="tag">termo</span></summary><div class="card-body">Conhecimento implícito armazenado nos pesos do modelo durante o treinamento.</div></details>
+            <details class="card"><summary><div class="term"><strong>Memória não paramétrica</strong><span class="small">Conhecimento recuperado externamente</span></div><span class="tag">termo</span></summary><div class="card-body">Conhecimento recuperado externamente, por exemplo em documentos, bases ou bancos vetoriais.</div></details>
+            <details class="card"><summary><div class="term"><strong>Proveniência</strong><span class="small">Origem verificável da informação</span></div><span class="tag">termo</span></summary><div class="card-body">Capacidade de indicar de onde uma informação veio, idealmente com fonte verificável.</div></details>
+            <details class="card"><summary><div class="term"><strong>Alucinação</strong><span class="small">Resposta plausível, mas errada</span></div><span class="tag">termo</span></summary><div class="card-body">Resposta plausível, mas incorreta, inventada ou não sustentada por evidência real.</div></details>
+            <details class="card"><summary><div class="term"><strong>Alucinação factual</strong><span class="small">Erro de fato</span></div><span class="tag">termo</span></summary><div class="card-body">Quando o modelo erra um fato, dado, número, definição ou evento.</div></details>
+            <details class="card"><summary><div class="term"><strong>Alucinação de referência</strong><span class="small">Fonte inventada</span></div><span class="tag">termo</span></summary><div class="card-body">Quando o modelo inventa artigos, autores, periódicos, diretrizes ou citações.</div></details>
+            <details class="card"><summary><div class="term"><strong>Alucinação de raciocínio</strong><span class="small">Lógica aparente, mas falha</span></div><span class="tag">termo</span></summary><div class="card-body">Quando o encadeamento lógico parece convincente, mas contém falhas ou saltos indevidos.</div></details>
+            <details class="card"><summary><div class="term"><strong>Prompt</strong><span class="small">Texto de entrada</span></div><span class="tag">termo</span></summary><div class="card-body">Texto de entrada que orienta o comportamento do modelo.</div></details>
+            <details class="card"><summary><div class="term"><strong>Prompt injection</strong><span class="small">Manipulação maliciosa</span></div><span class="tag">termo</span></summary><div class="card-body">Tentativa de manipular o sistema por meio de instruções maliciosas inseridas no conteúdo processado.</div></details>
+            <details class="card"><summary><div class="term"><strong>Instruction tuning</strong><span class="small">Ajuste para seguir instruções</span></div><span class="tag">termo</span></summary><div class="card-body">Ajuste adicional do modelo para seguir instruções de forma mais útil e mais alinhada ao formato conversacional.</div></details>
+            <details class="card"><summary><div class="term"><strong>Confiança do modelo</strong><span class="small">Segurança declarada</span></div><span class="tag">termo</span></summary><div class="card-body">Valor ou indicação de segurança declarada pelo sistema sobre sua própria resposta. Não deve ser confundido automaticamente com probabilidade real de acerto.</div></details>
+            <details class="card"><summary><div class="term"><strong>Calibração</strong><span class="small">Confiança versus acerto real</span></div><span class="tag">termo</span></summary><div class="card-body">Qualidade da relação entre a confiança declarada e a taxa real de acertos.</div></details>
+            <details class="card"><summary><div class="term"><strong>Brier score</strong><span class="small">Métrica probabilística</span></div><span class="tag">termo</span></summary><div class="card-body">Métrica de qualidade probabilística que penaliza previsões confiantes e erradas.</div></details>
+            <details class="card"><summary><div class="term"><strong>Temperature scaling</strong><span class="small">Ajuste de calibração</span></div><span class="tag">termo</span></summary><div class="card-body">Técnica de ajuste de calibração aplicada às saídas probabilísticas do modelo.</div></details>
+            <details class="card"><summary><div class="term"><strong>Threshold</strong><span class="small">Limiar de decisão</span></div><span class="tag">termo</span></summary><div class="card-body">Limiar a partir do qual o sistema aceita responder, classificar ou escalar o caso.</div></details>
+            <details class="card"><summary><div class="term"><strong>Reject option</strong><span class="small">Opção de recusa</span></div><span class="tag">termo</span></summary><div class="card-body">Estratégia em que o sistema opta por não responder ou não classificar quando a incerteza é alta.</div></details>
+            <details class="card"><summary><div class="term"><strong>Selective prediction</strong><span class="small">Responder só quando seguro</span></div><span class="tag">termo</span></summary><div class="card-body">Mecanismo que permite ao sistema responder apenas quando atinge um nível mínimo de segurança.</div></details>
+            <details class="card"><summary><div class="term"><strong>Risk–coverage</strong><span class="small">Risco versus cobertura</span></div><span class="tag">termo</span></summary><div class="card-body">Relação entre risco de erro e proporção de casos em que o sistema decide responder.</div></details>
+            <details class="card"><summary><div class="term"><strong>Conformal prediction</strong><span class="small">Cobertura estatística controlada</span></div><span class="tag">termo</span></summary><div class="card-body">Estratégia estatística para produzir previsões com cobertura controlada, desde que certas condições sejam razoavelmente atendidas.</div></details>
+            <details class="card"><summary><div class="term"><strong>Out of set problem</strong><span class="small">Caso fora do conjunto esperado</span></div><span class="tag">termo</span></summary><div class="card-body">Problema em que o sistema recebe algo fora do conjunto de situações que consegue tratar com segurança.</div></details>
+            <details class="card"><summary><div class="term"><strong>Drift</strong><span class="small">Mudança ao longo do tempo</span></div><span class="tag">termo</span></summary><div class="card-body">Mudança ao longo do tempo nos dados, no contexto ou no desempenho do sistema.</div></details>
+            <details class="card"><summary><div class="term"><strong>Viés</strong><span class="small">Desvio sistemático</span></div><span class="tag">termo</span></summary><div class="card-body">Desvio sistemático que pode favorecer ou prejudicar grupos, contextos ou tipos de caso.</div></details>
+            <details class="card"><summary><div class="term"><strong>Proxy</strong><span class="small">Variável substituta</span></div><span class="tag">termo</span></summary><div class="card-body">Variável usada como substituta de outra. Pode induzir erro quando não representa adequadamente o fenômeno real.</div></details>
+            <details class="card"><summary><div class="term"><strong>Automation bias</strong><span class="small">Excesso de confiança no sistema</span></div><span class="tag">termo</span></summary><div class="card-body">Tendência humana de confiar demais na recomendação automatizada.</div></details>
+            <details class="card"><summary><div class="term"><strong>Sistema sociotécnico</strong><span class="small">Tecnologia + pessoas + processo</span></div><span class="tag">termo</span></summary><div class="card-body">Sistema em que tecnologia, pessoas, processos e ambiente interagem. O desempenho depende do conjunto, não só do algoritmo.</div></details>
+            <details class="card"><summary><div class="term"><strong>UX</strong><span class="small">Experiência de uso</span></div><span class="tag">termo</span></summary><div class="card-body">Experiência de uso. No contexto clínico, influencia adesão, erro, fadiga e confiança indevida.</div></details>
+            <details class="card"><summary><div class="term"><strong>Auditoria</strong><span class="small">Rastreabilidade e revisão</span></div><span class="tag">termo</span></summary><div class="card-body">Processo de rastrear, revisar e verificar o comportamento do sistema, seus registros e seus impactos.</div></details>
+            <details class="card"><summary><div class="term"><strong>Governança</strong><span class="small">Regras e responsabilidades</span></div><span class="tag">termo</span></summary><div class="card-body">Conjunto de regras, papéis, controles e responsabilidades para uso seguro e responsável da tecnologia.</div></details>
+            <details class="card"><summary><div class="term"><strong>Curadoria</strong><span class="small">Seleção e manutenção de conteúdo</span></div><span class="tag">termo</span></summary><div class="card-body">Seleção, revisão e manutenção de conteúdos ou bases que serão usados para recuperação de informação.</div></details>
+            <details class="card"><summary><div class="term"><strong>Base curada</strong><span class="small">Fonte validada</span></div><span class="tag">termo</span></summary><div class="card-body">Conjunto de documentos selecionados e validados para servir de referência confiável.</div></details>
+            <details class="card"><summary><div class="term"><strong>Segurança em IA generativa</strong><span class="small">Proteção contra uso indevido</span></div><span class="tag">termo</span></summary><div class="card-body">Práticas de proteção contra vazamento, manipulação, uso indevido, exposição de dados e ataques em sistemas com modelos generativos.</div></details>
+            <details class="card"><summary><div class="term"><strong>Supply chain</strong><span class="small">Cadeia de dependências</span></div><span class="tag">termo</span></summary><div class="card-body">Cadeia de componentes, modelos, bibliotecas, serviços e dependências envolvidos em um sistema. Também é fonte de risco de segurança.</div></details>
+            <details class="card"><summary><div class="term"><strong>Dados sensíveis</strong><span class="small">Proteção reforçada</span></div><span class="tag">termo</span></summary><div class="card-body">Dados pessoais com proteção reforçada, como os relacionados à saúde.</div></details>
+            <details class="card"><summary><div class="term"><strong>Minimização de dados</strong><span class="small">Usar só o necessário</span></div><span class="tag">termo</span></summary><div class="card-body">Princípio de usar apenas os dados estritamente necessários para a finalidade proposta.</div></details>
+            <details class="card"><summary><div class="term"><strong>Controle de acesso</strong><span class="small">Restrições de visualização e uso</span></div><span class="tag">termo</span></summary><div class="card-body">Restrição de quem pode visualizar, enviar, modificar ou recuperar determinado conteúdo ou sistema.</div></details>
+            <details class="card"><summary><div class="term"><strong>Validação humana</strong><span class="small">Revisão antes do uso</span></div><span class="tag">termo</span></summary><div class="card-body">Revisão por profissional responsável antes que a informação gerada seja usada em contexto relevante.</div></details>
+            <details class="card"><summary><div class="term"><strong>Escalonamento clínico</strong><span class="small">Encaminhamento ao humano</span></div><span class="tag">termo</span></summary><div class="card-body">Encaminhamento do caso a um humano ou especialista quando a resposta automática é inadequada, incerta ou arriscada.</div></details>
+            <details class="card"><summary><div class="term"><strong>Dispositivo médico</strong><span class="small">Enquadramento regulatório</span></div><span class="tag">termo</span></summary><div class="card-body">Produto sujeito a enquadramento regulatório quando cumpre função médica com potencial impacto clínico.</div></details>
+            <details class="card"><summary><div class="term"><strong>Apoio à decisão</strong><span class="small">Assistência sem substituir julgamento</span></div><span class="tag">termo</span></summary><div class="card-body">Uso da IA para organizar, resumir, localizar, comparar ou estruturar informação, sem substituir o julgamento profissional.</div></details>
+            <details class="card"><summary><div class="term"><strong>Uso administrativo</strong><span class="small">Produtividade e organização</span></div><span class="tag">termo</span></summary><div class="card-body">Aplicação da IA em tarefas como padronização de texto, rascunhos, comunicação, organização documental e produtividade.</div></details>
+            <details class="card"><summary><div class="term"><strong>Atualização e consulta</strong><span class="small">Busca e síntese com fontes</span></div><span class="tag">termo</span></summary><div class="card-body">Uso da IA como interface de busca, síntese e navegação em conteúdos institucionais ou científicos, idealmente com fontes verificáveis.</div></details>
+          </div>
+        </section>
+
+        <section class="panel" id="uso-no-slide">
+          <h2>Texto para o slide final</h2>
+          <div class="note">
+            <div class="kicker">Sugestão enxuta</div>
+            <p><strong>Glossário ampliado de siglas e termos técnicos</strong><br>
+            Para manter a apresentação objetiva, o material completo foi disponibilizado em página própria.<br>
+            Acesse pela URL ou pelo QR code.</p>
+            <p><strong>Exemplo de URL:</strong><br>
+            <code>https://SEU-USUARIO.github.io/SEU-REPOSITORIO/glossario.html</code></p>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="wrap">
+    Material complementar da palestra sobre limitações da IA generativa na área médica.
+  </footer>
+
+  <script>
+    function attachFilter(inputId, gridId){
+      const input = document.getElementById(inputId);
+      const grid = document.getElementById(gridId);
+      const cards = Array.from(grid.querySelectorAll('.card'));
+
+      input.addEventListener('input', () => {
+        const q = input.value.toLowerCase().trim();
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          card.classList.toggle('hidden', q && !text.includes(q));
+        });
+      });
+    }
+    attachFilter('searchSiglas', 'siglasGrid');
+    attachFilter('searchTermos', 'termosGrid');
+  </script>
+</body>
+</html>
